@@ -51,19 +51,29 @@ class Starships(Base):
     model= Column (String(100))
     length= Column (Integer)
 
-class Favorites(Base):
-    __tablename__ = 'favorites'
+class Favorites_characters(Base):
+    __tablename__ = 'favorites_characters'
     favorite_id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
     characters_id = Column(Integer, ForeignKey('characters.id'))
-    planets_id = Column(Integer, ForeignKey('planets.id'))
-    starships_id =Column(Integer, ForeignKey('starships'))  
     user = relationship(User)
     characters = relationship(Characters)
+    
+class Favorites_planets(Base):
+    __tablename__ = 'favorites_planets'
+    favorite_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))    
+    planets_id = Column(Integer, ForeignKey('planets.id'))
+    user = relationship(User)
     planets = relationship(Planets)
-    starships = relationship(Starships)
-       
 
+class Favorites_starships(Base):
+    __tablename__ = 'favorites_starships'
+    favorite_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id')) 
+    starships_id =Column(Integer, ForeignKey('starships.id'))  
+    user = relationship(User)
+    starships = relationship(Starships)    
 
     def to_dict(self):
         return {}
